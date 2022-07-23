@@ -42,7 +42,7 @@
     /* init body so append is possible */
     const body = document.body;
     body.style.width = "100%";
-    body.style.height = "100%";
+    body.style.height = "100vh";
     body.style.margin = "0";
     body.style.backgroundColor = "teal";
     body.style.textAlign = "center";
@@ -146,7 +146,6 @@
         colorChoice = "#ffa5ab"
     })
 
-
     /* button/popup sets number of gridxgrid */ 
     const rowButton = document.createElement('button');
     rowButton.innerText = "Change grid size";
@@ -164,7 +163,6 @@
     clearButton.innerText = "Clear sketch";
     clearButton.addEventListener('click', () => {
         setGrid(rowTot)});
-
 
     /* init header and config */
     const header = document.createElement('div');
@@ -242,12 +240,7 @@
     colorGrid.appendChild(colorItem11);
     colorGrid.appendChild(colorItem12);
     body.appendChild(gridContainer);
-    
-
-
-
-
-    
+      
 </script>    
 </body>
 </html>
