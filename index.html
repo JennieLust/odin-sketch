@@ -5,24 +5,146 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body onload="javascript:setGrid(16)">
     
+</head>
 
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+    button {
+        background-color: limegreen;
+        padding: 10px 20px 10px 20px;
+        margin: 20px;
+        font-family: 'Comfortaa', cursive;
+        border: 1px solid darkcyan;
+        box-shadow: 6px 6px 3px -3px rgba(0,0,0,0.5);
+    }
+
+    button:hover {
+        background-color: greenyellow;
+    }
+
+    .color-choice {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .color-choice:hover {
+        opacity: 50%;
+    }
+
+</style>
+
+<body onload="javascript:setGrid(16)">
 
 <script>
 
-    /* init body so append is possible*/
+    /* init body so append is possible */
     const body = document.body;
     body.style.width = "100%";
     body.style.height = "100%";
     body.style.margin = "0";
     body.style.backgroundColor = "teal";
-
-    /* ADD display grid to body, and config it */
+    body.style.textAlign = "center";
+    body.style.display = "grid";
+    body.style.gridTemplateColumns = "1fr 600px 1fr";
+    body.style.gridTemplateRows = "120px 1fr 1fr";
 
     /* global var that sets number of rows/cols */
     let rowTot = 16;
+    let colorChoice = "black"
+
+    /* div for tool selections */
+    const toolDiv = document.createElement('div');
+    toolDiv.style.gridRowStart = "2";
+    toolDiv.style.gridRowEnd = "3";
+    toolDiv.style.gridColumnStart = "3";
+    toolDiv.style.gridColumnEnd = "4";
+    toolDiv.style.display = "flex";
+    toolDiv.style.flexDirection = "column";
+    toolDiv.style.alignItems = "center";
+
+    /* color choice buttons */
+    const colorGrid = document.createElement('div');
+    colorGrid.style.display = "grid";
+    colorGrid.style.gridTemplateColumns = "40px 40px"
+    colorGrid.style.gridTemplateRows = "repeat(6, 40px)"
+    colorGrid.style.gap = "0px";
+    colorGrid.style.margin = "20px"
+    
+    /* config color buttons */
+    const colorItem1 = document.createElement('button');
+    const colorItem2 = document.createElement('button');
+    const colorItem3 = document.createElement('button');
+    const colorItem4 = document.createElement('button');
+    const colorItem5 = document.createElement('button');
+    const colorItem6 = document.createElement('button');
+    const colorItem7 = document.createElement('button');
+    const colorItem8 = document.createElement('button');
+    const colorItem9 = document.createElement('button');
+    const colorItem10 = document.createElement('button');
+    const colorItem11 = document.createElement('button');
+    const colorItem12 = document.createElement('button');
+    colorItem1.className = "color-choice";
+    colorItem2.className = "color-choice";
+    colorItem3.className = "color-choice";
+    colorItem4.className = "color-choice";
+    colorItem5.className = "color-choice";
+    colorItem6.className = "color-choice";
+    colorItem7.className = "color-choice";
+    colorItem8.className = "color-choice";
+    colorItem9.className = "color-choice";
+    colorItem10.className = "color-choice";
+    colorItem11.className = "color-choice";
+    colorItem12.className = "color-choice";
+    colorItem1.style.background = "black";
+    colorItem2.style.background = "white";
+    colorItem3.style.background = "#e3342f";
+    colorItem4.style.background = "#f6993f";
+    colorItem5.style.background = "#ffed4a";
+    colorItem6.style.background = "#38c172";
+    colorItem7.style.background = "#4dc0b5";
+    colorItem8.style.background = "#3490dc";
+    colorItem10.style.background = "#9561e2";
+    colorItem9.style.background = "#6574cd";
+    colorItem12.style.background = "#ffa5ab";
+    colorItem11.style.background = "#f66d9b";
+    colorItem1.addEventListener('click', () => {
+        colorChoice = "black"
+    })
+    colorItem2.addEventListener('click', () => {
+        colorChoice = "white"
+    })
+    colorItem3.addEventListener('click', () => {
+        colorChoice = "#e3342f"
+    })
+    colorItem4.addEventListener('click', () => {
+        colorChoice = "#f6993f"
+    })
+    colorItem5.addEventListener('click', () => {
+        colorChoice = "#ffed4a"
+    })
+    colorItem6.addEventListener('click', () => {
+        colorChoice = "#38c172"
+    })
+    colorItem7.addEventListener('click', () => {
+        colorChoice = "#4dc0b5"
+    })
+    colorItem8.addEventListener('click', () => {
+        colorChoice = "#3490dc"
+    })
+    colorItem9.addEventListener('click', () => {
+        colorChoice = "#6574cd";
+    })
+    colorItem10.addEventListener('click', () => {
+        colorChoice = "#9561e2"
+    })
+    colorItem11.addEventListener('click', () => {
+        colorChoice = "#f66d9b"
+    })
+    colorItem12.addEventListener('click', () => {
+        colorChoice = "#ffa5ab"
+    })
 
 
     /* button/popup sets number of gridxgrid */ 
@@ -30,7 +152,11 @@
     rowButton.innerText = "Change grid size";
     rowButton.addEventListener('click', () => {
         rowTot = prompt("Enter a number between 6 and 100:")
-        setGrid(rowTot);
+        /* input validation */
+        if (rowTot >= 6 && rowTot <= 100) {
+        setGrid(rowTot);} else {
+            alert("Not a valid number.")
+        }
     })
 
     /* clear sketch button */
@@ -39,12 +165,23 @@
     clearButton.addEventListener('click', () => {
         setGrid(rowTot)});
 
+
     /* init header and config */
     const header = document.createElement('div');
     header.innerText = "Etch-a-Sketch";
     header.style.textAlign = "center";
+    header.style.width = "560px";
     header.style.color = "white";
     header.style.padding = "20px";
+    header.style.marginBottom = "30px"
+    header.style.fontFamily = "'Comfortaa', cursive";
+    header.style.fontSize = "50px";
+    header.style.borderBottom = "5px solid limegreen";
+    header.style.gridRowStart = "1";
+    header.style.gridRowEnd = "2";
+    header.style.gridColumnStart = "2";
+    header.style.gridColumnEnd = "3";
+    header.style.justifySelf = "center";
 
     /* creates and config gridContainer */
     const gridContainer = document.createElement('div');
@@ -52,11 +189,15 @@
     gridContainer.style.width = "600px";
     gridContainer.style.textAlign = "center";
     gridContainer.style.alignContent = "center";
-    
     gridContainer.className = "grid-container";
     gridContainer.id = "grid-container";
     gridContainer.style.display = "grid";
     gridContainer.style.backgroundColor = "lightseagreen";
+    gridContainer.style.gridColumnStart = "2";
+    gridContainer.style.gridColumnEnd = "3";
+    gridContainer.style.gridRowStart = "2";
+    gridContainer.style.gridRowEnd = "3";
+    gridContainer.style.justifySelf = "center";
 
     function setGrid(rowTot) {
     /* clears out any previous divs */
@@ -76,7 +217,7 @@
         this["gridItem"+i].style.backgroundColor = "lightseagreen";
 
         this["gridItem"+i].addEventListener('mouseenter', () => {
-           event.target.style.backgroundColor = "black";
+           event.target.style.backgroundColor = colorChoice;
            event.target.style.cursor = "crosshair"
         });
         gridContainer.appendChild(this["gridItem"+i]) };
@@ -84,8 +225,22 @@
     }
 
     body.appendChild(header);
-    body.appendChild(rowButton);
-    body.appendChild(clearButton);
+    body.appendChild(toolDiv);
+    toolDiv.appendChild(rowButton);
+    toolDiv.appendChild(clearButton);
+    toolDiv.appendChild(colorGrid);
+    colorGrid.appendChild(colorItem1);
+    colorGrid.appendChild(colorItem2);
+    colorGrid.appendChild(colorItem3);
+    colorGrid.appendChild(colorItem4);
+    colorGrid.appendChild(colorItem5);
+    colorGrid.appendChild(colorItem6);
+    colorGrid.appendChild(colorItem7);
+    colorGrid.appendChild(colorItem8);
+    colorGrid.appendChild(colorItem9);
+    colorGrid.appendChild(colorItem10);
+    colorGrid.appendChild(colorItem11);
+    colorGrid.appendChild(colorItem12);
     body.appendChild(gridContainer);
     
 
