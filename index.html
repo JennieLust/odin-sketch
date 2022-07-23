@@ -21,16 +21,23 @@
 
     /* ADD display grid to body, and config it */
 
-
+    /* global var that sets number of rows/cols */
+    let rowTot = 16;
 
 
     /* button/popup sets number of gridxgrid */ 
     const rowButton = document.createElement('button');
     rowButton.innerText = "Change grid size";
     rowButton.addEventListener('click', () => {
-        let rowTot = prompt("Enter a number between 6 and 100:")
+        rowTot = prompt("Enter a number between 6 and 100:")
         setGrid(rowTot);
     })
+
+    /* clear sketch button */
+    const clearButton = document.createElement('button');
+    clearButton.innerText = "Clear sketch";
+    clearButton.addEventListener('click', () => {
+        setGrid(rowTot)});
 
     /* init header and config */
     const header = document.createElement('div');
@@ -41,8 +48,8 @@
 
     /* creates and config gridContainer */
     const gridContainer = document.createElement('div');
-    gridContainer.style.height = "400px";
-    gridContainer.style.width = "400px";
+    gridContainer.style.height = "600px";
+    gridContainer.style.width = "600px";
     gridContainer.style.textAlign = "center";
     gridContainer.style.alignContent = "center";
     
@@ -52,6 +59,8 @@
     gridContainer.style.backgroundColor = "lightseagreen";
 
     function setGrid(rowTot) {
+    /* clears out any previous divs */
+        gridContainer.innerHTML = '';
     /* number of rows and columns based on rowTot */
         gridContainer.style.gridTemplateColumns = `repeat(${rowTot}, 1fr`;
         gridContainer.style.gridTemplateRows = `repeat(${rowTot}, 1fr)`;
@@ -64,9 +73,11 @@
         /* makes grid-child visible for fesökning */
         this["gridItem"+i].innerText = "";
         this["gridItem"+i].style.border = "1px solid teal";
+        this["gridItem"+i].style.backgroundColor = "lightseagreen";
 
-        this["gridItem"+i].addEventListener('mouseover', () => {
+        this["gridItem"+i].addEventListener('mouseenter', () => {
            event.target.style.backgroundColor = "black";
+           event.target.style.cursor = "crosshair"
         });
         gridContainer.appendChild(this["gridItem"+i]) };
 
@@ -74,6 +85,7 @@
 
     body.appendChild(header);
     body.appendChild(rowButton);
+    body.appendChild(clearButton);
     body.appendChild(gridContainer);
     
 
